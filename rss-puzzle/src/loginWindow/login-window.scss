@@ -1,0 +1,59 @@
+.main {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104, 128, 138, .4) 10%, rgba(138, 114, 76, 0) 40%), linear-gradient(to bottom, rgba(57, 173, 219, .25) 0%, rgba(42, 60, 87, .4) 100%), linear-gradient(135deg, #670d10 0%, #092756 100%);
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  padding: 10px;
+
+  label {
+    font-size: 20px;
+    color: #e6e6e6;
+  }
+}
+
+.form-input {
+  border-radius: 5%;
+  margin: 5px 0 20px;
+  padding: 5px;
+  font-size: medium;
+  font-size: 13px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+
+  &:focus {
+    box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.form-login_btn {
+  display: inline-block;
+  padding: 4px 10px 4px;
+  margin-bottom: 0;
+  font-size: 13px;
+  line-height: 18px;
+  color: #333333;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.form-login_btn:hover {
+  color: #333333;
+  text-decoration: none;
+  background-color: orange;
+  background-position: 0 -15px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
+}
