@@ -1,71 +1,7 @@
-// import { createTeg } from '../base-components/base-components';
-// import { checkInput } from './func-login';
-
-// export class LoginWindow {
-//   constructor() {}
-
-//   public createMain(): HTMLElement {
-//     const main = createTeg({
-//       tag: 'main',
-//       className: 'main',
-//     });
-
-//     this._createLoginForm(main);
-//     return main;
-//   }
-
-//   private _createLoginForm(main: HTMLElement) {
-//     const div = document.createElement('div');
-
-//     const form = this._createFormLogin();
-//     div.append(form);
-//     main.append(div);
-//     checkInputName();
-//   }
-
-//   private _createFormLogin(): HTMLElement {
-//     //we use class basic tag components to create and check new tgs;
-//     const form = createTeg({
-//       tag: 'form',
-//       className: 'form-login',
-//       childrenArray: [
-//         {
-//           tag: 'p',
-//           className: 'login',
-//           textContent: 'Login',
-//         },
-//         {
-//           tag: 'label',
-//           attributeType: { type: 'for', text: 'username' },
-//         },
-//         {
-//           tag: 'input',
-//           attributeType: { type: 'name', text: 'userName' },
-//           id: 'username',
-//         },
-//         {
-//           tag: 'label',
-//           attributeType: { type: 'for', text: 'userSurname' },
-//         },
-//         {
-//           tag: 'input',
-//           attributeType: { type: 'name', text: 'userName' },
-//           id: 'userSurname',
-//         },
-//         { tag: 'button', className: 'form-login_btn', textContent: 'Login' },
-//       ],
-//     });
-//     form.addEventListener('click', (ev) => {
-//       if (ev.target instanceof HTMLElement && ev.target.classList.contains('form-login_btn')) {
-//         console.log(333);
-//       }
-//     });
-//     return form;
-//   }
-// }
 import { createTeg } from '../base-components/base-components';
 import { checkInput } from './func-login';
 import './login-window.scss';
+
 export class LoginWindow {
   constructor() {}
 
@@ -96,7 +32,7 @@ export class LoginWindow {
     });
     const inputUsername = createTeg({
       tag: 'input',
-      attributeType: { type: 'name', text: 'userName' },
+      attributeType: { type: 'name', text: 'username' },
       id: 'username',
       className: 'form-input',
     });
@@ -111,8 +47,8 @@ export class LoginWindow {
 
     const inputUserSurname = createTeg({
       tag: 'input',
-      attributeType: { type: 'name', text: 'userSurname' },
-      id: 'userSurname',
+      attributeType: { type: 'name', text: 'user-surname' },
+      id: 'user-surname',
       className: 'form-input',
     });
     inputUserSurname.setAttribute('required', '');
@@ -120,7 +56,7 @@ export class LoginWindow {
 
     const labelUserSurname = createTeg({
       tag: 'label',
-      attributeType: { type: 'for', text: 'userSurname' },
+      attributeType: { type: 'for', text: 'user-surname' },
       textContent: 'User Surname',
     });
 
@@ -131,11 +67,7 @@ export class LoginWindow {
     // });
     const BTN = createTeg({ tag: 'button', className: 'form-login_btn', textContent: 'Login' });
 
-    BTN.addEventListener('click', (ev) => {
-      if (ev.target instanceof HTMLElement && ev.target.classList.contains('form-login_btn')) {
-        console.log(333);
-      }
-    });
+    // BTN.addEventListener('submit', );
     form.append(labelUsername, inputUsername, labelUserSurname, inputUserSurname, BTN);
     return form;
   }
