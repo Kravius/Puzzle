@@ -1,7 +1,7 @@
 import { createTeg } from '../base-components/base-components';
 import { checkInput } from './func-login';
 import './login-window.scss';
-
+import { checkAfterClickBtnInputs } from './save-LocalStorage';
 export class LoginWindow {
   constructor() {}
 
@@ -67,7 +67,7 @@ export class LoginWindow {
     // });
     const BTN = createTeg({ tag: 'button', className: 'form-login_btn', textContent: 'Login' });
 
-    // BTN.addEventListener('submit', );
+    BTN.addEventListener('click', checkAfterClickBtnInputs);
     form.append(labelUsername, inputUsername, labelUserSurname, inputUserSurname, BTN);
     return form;
   }

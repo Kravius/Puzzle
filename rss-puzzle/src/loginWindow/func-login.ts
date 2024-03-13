@@ -30,15 +30,6 @@ const checkInput: fucusFunc = function (ev?: FocusEvent) {
   }
 };
 
-// maybe we will need in future to check BTN
-// const checkAfterClickBtnInputs: SubmitFunc = (ev?: SubmitEvent) => {
-//   const inputname = document.querySelector('.form-input'[0]) as HTMLInputElement;
-//   const inputSurname = document.querySelector('.form-input'[1]) as HTMLInputElement;
-
-//   changeValueInput('short', inputname);
-//   return true;
-// };
-
 const checkLengthAndRegExp: lengthFunc = (value, length) => {
   const regularTest = /^[a-zA-Z-]+$/;
   return value.length >= length && regularTest.test(value);
