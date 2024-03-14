@@ -26,12 +26,13 @@ export class BaseComponents {
     }
     childrenArray?.forEach((el) => {
       const element = document.createElement(el.tag);
-      // if (el.onClickFunction) {
-      //   element.addEventListener('click', onClickFunction);
-      // }
-      // if (el.className) {
-      //   element.className = el.className;
-      // }
+      if (el.className) {
+        if (Array.isArray(el.className)) {
+          element.classList.add(...el.className);
+        } else {
+          element.classList.add(el.className);
+        }
+      }
       if (el.textContent) {
         element.textContent = el.textContent;
       }

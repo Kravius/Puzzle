@@ -17,7 +17,7 @@ export class LoginWindow {
 
   private _createLoginForm(main: HTMLElement) {
     const div = document.createElement('div');
-
+    div.id = 'login-screen';
     const form = this._createFormLogin();
     div.append(form);
     main.append(div);

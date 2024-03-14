@@ -1,0 +1,8 @@
+/* //fonts */
+@font-face {
+  font-family: 'Space';
+  src: url('spaceagecyrillicregular.ttf') format('truetype');
+  /* Дополнительные форматы шрифтов, если они доступны */
+  font-weight: normal;
+  font-style: normal;
+}
