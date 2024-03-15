@@ -50,4 +50,4 @@ export class BaseComponents {
 }
 
 // made function to generation tag from class
-export const createTeg = (props: baseComponentsTypes): HTMLElement => new BaseComponents().createBaseComponents(props);
+export const createTag = (props: baseComponentsTypes): HTMLElement => new BaseComponents().createBaseComponents(props);

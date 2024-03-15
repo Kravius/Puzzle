@@ -1,14 +1,20 @@
-import { createTeg } from '../base-components/base-components';
+import { createTag } from '../base-components/base-components';
 import './start.scss';
+// import { Header } from '../header/header';
+
 export class StartWindow {
   loginScreen: HTMLElement | null;
   main: HTMLElement | null;
+  startWindow: HTMLElement | null;
+  // headerClass: Header;
   constructor() {
+    this.main = null;
     this.loginScreen = null;
-    this.main = document.querySelector('.main');
+    this.startWindow = null;
+    // this.headerClass = new Header();
   }
   createStartWindow() {
-    const divStart = createTeg({
+    this.startWindow = createTag({
       tag: 'div',
       id: 'start-screen',
       childrenArray: [
@@ -18,18 +24,35 @@ export class StartWindow {
         { tag: 'p', textContent: 'Select tooltips in the menu.' },
       ],
     });
-    const startBTN = createTeg({ tag: 'button', className: 'start-btn', textContent: 'Start' });
-    divStart.append(startBTN);
-    this.main?.append(divStart);
+    const startBTN = createTag({ tag: 'button', className: 'start-btn', textContent: 'Start' });
+    this.startWindow.append(startBTN);
+    this.main?.append(this.startWindow);
   }
   removeLoginWindowFromMain() {
-    const loginScreen = document.querySelector('#login-screen') as HTMLElement;
+    this.main = document.querySelector('.main');
+    this.loginScreen = document.querySelector('#login-screen') as HTMLElement;
+    console.log(this.main);
     if (this.main) {
-      this.loginScreen = this.main?.removeChild(loginScreen) as HTMLElement;
-      // this.main.style.setProperty('background-image', `url('../../public/background-start/planet.jpg')`);
+      this.loginScreen = this.main?.removeChild(this.loginScreen) as HTMLElement;
       this.main.style.backgroundImage = `url('../../public/background-start/stars.jpeg')`;
       this.main.style.backgroundSize = '100vw 100vh';
     }
+    //create Start window
     this.createStartWindow();
   }
+
+  removeStartWindowFromMain() {
+    if (this.main) {
+      if (this.startWindow) {
+        this.startWindow = this.main?.removeChild(this.startWindow) as HTMLElement;
+      }
+      if (this.loginScreen) {
+        this.main?.append(this.loginScreen);
+        this.main.style.backgroundImage = ``;
+        this.main.style.backgroundSize = '';
+      }
+    }
+  }
 }
+
+export const startWindow = new StartWindow();

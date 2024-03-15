@@ -1,4 +1,4 @@
-import { createTeg } from '../base-components/base-components';
+import { createTag } from '../base-components/base-components';
 import { checkInput } from './func-login';
 import './login-window.scss';
 import { checkAfterClickBtnInputs } from './save-LocalStorage';
@@ -6,7 +6,7 @@ export class LoginWindow {
   constructor() {}
 
   public createMain(): HTMLElement {
-    const main = createTeg({
+    const main = createTag({
       tag: 'main',
       className: 'main',
     });
@@ -26,11 +26,11 @@ export class LoginWindow {
 
   private _createFormLogin(): HTMLElement {
     //we use class basic tag components to create and check new tgs;
-    const form = createTeg({
+    const form = createTag({
       tag: 'form',
       className: 'form-login',
     });
-    const inputUsername = createTeg({
+    const inputUsername = createTag({
       tag: 'input',
       attributeType: { type: 'name', text: 'username' },
       id: 'username',
@@ -39,13 +39,13 @@ export class LoginWindow {
     inputUsername.setAttribute('required', '');
     inputUsername.addEventListener('blur', checkInput);
 
-    const labelUsername = createTeg({
+    const labelUsername = createTag({
       tag: 'label',
       attributeType: { type: 'for', text: 'username' },
       textContent: 'Username',
     });
 
-    const inputUserSurname = createTeg({
+    const inputUserSurname = createTag({
       tag: 'input',
       attributeType: { type: 'name', text: 'user-surname' },
       id: 'user-surname',
@@ -54,18 +54,18 @@ export class LoginWindow {
     inputUserSurname.setAttribute('required', '');
     inputUserSurname.addEventListener('blur', checkInput);
 
-    const labelUserSurname = createTeg({
+    const labelUserSurname = createTag({
       tag: 'label',
       attributeType: { type: 'for', text: 'user-surname' },
       textContent: 'User Surname',
     });
 
-    // const paragraph = createTeg({
+    // const paragraph = createTag({
     //   tag: 'p',
     //   className: 'login',
     //   textContent: 'Login',
     // });
-    const BTN = createTeg({ tag: 'button', className: 'form-login_btn', textContent: 'Login' });
+    const BTN = createTag({ tag: 'button', className: 'form-login_btn', textContent: 'Login' });
 
     BTN.addEventListener('click', checkAfterClickBtnInputs);
     form.append(labelUsername, inputUsername, labelUserSurname, inputUserSurname, BTN);
