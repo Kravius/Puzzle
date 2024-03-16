@@ -1,4 +1,5 @@
 import { User } from './type';
+import { createTag } from '../base-components/base-components';
 
 export class UserLogFunc {
   private _user: User | undefined;
@@ -23,7 +24,11 @@ export class UserLogFunc {
   logIn() {
     const userTextLog = document.querySelector('.user-name') as HTMLElement;
     if (this._user) {
-      userTextLog.textContent = `_ ${this._user.name} ${this._user.surname} _`;
+      this.greetingMessage();
+      setTimeout(() => {
+        if (this._user) userTextLog.textContent = `_ ${this._user.name} ${this._user.surname} _`;
+      }, 3000);
+
       return;
     } else return false;
   }
@@ -32,6 +37,22 @@ export class UserLogFunc {
     localStorage.removeItem('user');
     const userTextLog = document.querySelector('.user-name') as HTMLElement;
     userTextLog.textContent = ``;
+  }
+
+  greetingMessage() {
+    let content = '';
+    if (this._user) {
+      content = `Hello ${this._user.name} ${this._user.surname}`;
+    }
+    const messages = createTag({
+      tag: 'div',
+      className: 'messages',
+      childrenArray: [{ tag: 'p', textContent: content }],
+    });
+    document.querySelector('.main')?.append(messages);
+    setTimeout(() => {
+      document.querySelector('.messages')?.remove();
+    }, 2000);
   }
 }
 

@@ -43,4 +43,5 @@ export class Header {
     //save _header for future use
     if (this._header) this._header = this._wrapper?.removeChild(this._header) as HTMLElement;
   }
+
 }
