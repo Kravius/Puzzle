@@ -16,8 +16,9 @@ export class ClickMoveDraggableSpan {
         for (let i = 0; i < guessingSentences.length; i++) {
           const el = guessingSentences[i];
           if (el.textContent === '') {
-          el.textContent = targetElement.textContent;
-          break;
+            el.textContent = targetElement.textContent;
+            targetElement.textContent = '';
+            break;
           }
         }
       }

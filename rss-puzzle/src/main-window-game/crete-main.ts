@@ -65,6 +65,11 @@ export class CreateMainGameWindow {
         ],
       });
       parent.append(spanWordTextEnglish);
+      setTimeout(() => {
+        if (guessing) {
+          spanWordTextEnglish.style.width = `${spanWordTextEnglish.offsetWidth}px`;
+        }
+      }, 0);
     });
   }
 
