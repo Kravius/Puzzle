@@ -3,7 +3,7 @@ export interface childrenArrayType {
   className?: string | string[];
   textContent?: string;
   id?: string;
-  attributeType?: attributeType;
+  attributeType?: AttributeType | AttributeType[];
   onClickFunction?: (ev?: MouseEvent) => void;
 }
 
@@ -11,7 +11,7 @@ export interface baseComponentsTypes extends childrenArrayType {
   childrenArray?: childrenArrayType[];
 }
 
-interface attributeType {
+interface AttributeType {
   type: string;
   text: string;
 }

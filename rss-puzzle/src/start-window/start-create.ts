@@ -1,6 +1,7 @@
 import { createTag } from '../base-components/base-components';
 import './start.scss';
 import { startGameBtn } from './start-btn';
+import { CreateMainGameWindow } from '../main-window-game/crete-main';
 // import { Header } from '../header/header';
 
 export class StartWindow {
@@ -28,6 +29,8 @@ export class StartWindow {
     const startBTN = createTag({ tag: 'button', className: 'start-btn', textContent: 'Start' });
     startBTN.addEventListener('click', () => {
       startGameBtn(this.main, this.startWindow);
+      //create Main window game!!
+      const mainGameWindow = new CreateMainGameWindow();
     });
     this.startWindow.append(startBTN);
     this.main?.append(this.startWindow);
@@ -35,11 +38,14 @@ export class StartWindow {
   removeLoginWindowFromMain() {
     this.main = document.querySelector('.main');
     this.loginScreen = document.querySelector('#login-screen') as HTMLElement;
-    console.log(this.main);
+    //delete
+    // console.log(this.main);
     if (this.main) {
       this.loginScreen = this.main?.removeChild(this.loginScreen) as HTMLElement;
       this.main.style.backgroundImage = `url('../../public/background-start/stars.jpeg')`;
       this.main.style.backgroundSize = '100vw 100vh';
+
+      //we delete after end
     }
     //create Start window
     this.createStartWindow();

@@ -1,4 +1,5 @@
 import './style.scss';
+import './main.scss';
 import { startWindow } from './start-window/start-create';
 // import { StartWindow } from './start-window/start-create';
 import { Wrapper } from './wrapper/wrapper';
@@ -12,7 +13,8 @@ const headerClass = new Header();
 
 //check Have we user or not to load startWindow
 if (userLogFuncClass) {
-  console.log(userLogFuncClass.getUser);
+  //delete
+  // console.log(userLogFuncClass.getUser);
   if (userLogFuncClass.getUser) {
     headerClass.createHeader();
     startWindow.removeLoginWindowFromMain();

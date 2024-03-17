@@ -22,8 +22,17 @@ export class BaseComponents {
       createElementParents.id = id;
     }
     if (attributeType) {
-      createElementParents.setAttribute(attributeType.text, attributeType.text);
+      if (Array.isArray(attributeType)) {
+        attributeType.forEach((attribute) => {
+          createElementParents.setAttribute(attribute.type, attribute.text);
+        });
+      } else {
+        createElementParents.setAttribute(attributeType.type, attributeType.text);
+      }
     }
+    // if (attributeType) {
+    //   createElementParents.setAttribute(attributeType.type, attributeType.text);
+    // }
     childrenArray?.forEach((el) => {
       const element = document.createElement(el.tag);
       if (el.className) {
@@ -40,7 +49,13 @@ export class BaseComponents {
         element.id = el.id;
       }
       if (el.attributeType) {
-        element.setAttribute(el.attributeType.text, el.attributeType.text);
+        if (Array.isArray(el.attributeType)) {
+          el.attributeType.forEach((attribute) => {
+            element.setAttribute(attribute.text, attribute.text);
+          });
+        } else {
+          element.setAttribute(el.attributeType.type, el.attributeType.text);
+        }
       }
       createElementParents.append(element);
       return element;
