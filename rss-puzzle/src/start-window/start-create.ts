@@ -1,5 +1,6 @@
 import { createTag } from '../base-components/base-components';
 import './start.scss';
+import { startGameBtn } from './start-btn';
 // import { Header } from '../header/header';
 
 export class StartWindow {
@@ -25,6 +26,9 @@ export class StartWindow {
       ],
     });
     const startBTN = createTag({ tag: 'button', className: 'start-btn', textContent: 'Start' });
+    startBTN.addEventListener('click', () => {
+      startGameBtn(this.main, this.startWindow);
+    });
     this.startWindow.append(startBTN);
     this.main?.append(this.startWindow);
   }
