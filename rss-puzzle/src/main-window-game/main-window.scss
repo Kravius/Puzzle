@@ -103,5 +103,21 @@
 }
 
 .guessing-field {
+  display: flex;
+  flex-direction: column;
   padding-top: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.guessing_container {
+  margin-left: 50px;
+  display: flex;
+  width: clamp(20.625rem, -2.5rem + 74vw, 43.75rem);
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid;
+}
+
+.draggable-word {
+  flex: 1;
 }

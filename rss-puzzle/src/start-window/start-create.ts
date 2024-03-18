@@ -26,7 +26,7 @@ export class StartWindow {
         { tag: 'p', textContent: 'Select tooltips in the menu.' },
       ],
     });
-    const startBTN = createTag({ tag: 'button', className: 'start-btn', textContent: 'Start' });
+    const startBTN = createTag({ tag: 'button', className: ['button', 'start-btn'], textContent: 'Start' });
     startBTN.addEventListener('click', () => {
       startGameBtn(this.main, this.startWindow);
       //create Main window game!!

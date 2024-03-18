@@ -26,7 +26,7 @@ export class Header {
   }
 
   private createLogOutBtn() {
-    const logOutBtn = createTag({ tag: 'button', className: ['log-out_btn', 'start-btn'], textContent: 'Log Out' });
+    const logOutBtn = createTag({ tag: 'button', className: ['log-out_btn', 'button'], textContent: 'Log Out' });
     logOutBtn.addEventListener('click', () => {
       userLogFuncClass.logOutText();
       this.removeHeaderFromWrapper();
@@ -43,5 +43,4 @@ export class Header {
     //save _header for future use
     if (this._header) this._header = this._wrapper?.removeChild(this._header) as HTMLElement;
   }
-
 }

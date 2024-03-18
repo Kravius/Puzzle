@@ -1,13 +1,16 @@
 import { createTag } from '../base-components/base-components';
 import './main-window.scss';
 import { data } from '../take-data/data';
-import { ClickMoveDraggableSpan } from './functional-game/click-guessing';
+import { ClickMoveDraggableSpan } from './functional-game/move-words';
+import { checkGuessingSentencesForEmpty, checkSentencesInGameFiled } from './functional-game/check-btn';
 
 export class CreateMainGameWindow {
   private main: HTMLElement | null;
+  private id: string | null;
   clickMoveDraggable: ClickMoveDraggableSpan;
   constructor() {
     this.main = document.querySelector('.main');
+    this.id = null;
     this.initialize();
     this.clickMoveDraggable = new ClickMoveDraggableSpan();
   }
@@ -36,6 +39,7 @@ export class CreateMainGameWindow {
     let i = 1;
     const containerSpanNum = createTag({ tag: 'div', className: 'container-num' });
     data.rounds[0].words.forEach((el) => {
+      this.id = `_${el.id}`;
       const spanNum = createTag({ tag: 'span', className: 'span-num', textContent: `${i++}` });
 
       // i can t undestend why can t fine document.querySelectorAll(`#${sentencesId} span`);
@@ -74,6 +78,7 @@ export class CreateMainGameWindow {
       setTimeout(() => {
         if (guessing) {
           spanWordTextEnglish.style.width = `${spanWordTextEnglish.offsetWidth}px`;
+          spanWordTextEnglish.style.height = `${spanWordTextEnglish.offsetHeight}px`;
         }
       }, 0);
     });
@@ -83,7 +88,7 @@ export class CreateMainGameWindow {
     const guessingField = createTag({ tag: 'section', className: ['section', 'guessing-field'] });
     const containerGuessing = createTag({
       tag: 'div',
-      className: ['section', 'guessing_container'],
+      className: 'guessing_container',
       // id: `${data.rounds[0].words[0].id}`,
       attributeType: { type: 'data-draggable-id', text: `${data.rounds[0].words[0].id}` },
     });
@@ -96,7 +101,30 @@ export class CreateMainGameWindow {
       'true'
     );
 
+    containerGuessing.addEventListener('click', () => {
+      checkGuessingSentencesForEmpty();
+    });
     guessingField.append(containerGuessing);
+
+    this.createCheckBtn(guessingField);
     this.main?.append(guessingField);
+  }
+
+  createCheckBtn(parent: HTMLElement) {
+    const divBtns = createTag({ tag: 'div', className: 'guessing-field__btn' });
+    const checkBtn = createTag({
+      tag: 'button',
+      className: ['button', 'guessing-field__check-btn'],
+      textContent: 'Check',
+      attributeType: { type: 'disabled', text: '' },
+    });
+
+    checkBtn.addEventListener('click', () => {
+      if (this.id) {
+        checkSentencesInGameFiled();
+      }
+    });
+    divBtns.append(checkBtn);
+    parent.append(divBtns);
   }
 }
