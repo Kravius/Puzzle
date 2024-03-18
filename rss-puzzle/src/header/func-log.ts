@@ -26,7 +26,7 @@ export class UserLogFunc {
     const userTextLog = document.querySelector('.user-name') as HTMLElement;
     if (this._user) {
       //remove // this ,must work
-      // this.greetingMessage();
+      this.greetingMessage();
       setTimeout(() => {
         if (this._user) userTextLog.textContent = `_ ${this._user.name} ${this._user.surname} _`;
       }, 3000);
@@ -40,22 +40,22 @@ export class UserLogFunc {
     const userTextLog = document.querySelector('.user-name') as HTMLElement;
     userTextLog.textContent = ``;
   }
-//remove // this ,must work
-  // greetingMessage() {
-  //   let content = '';
-  //   if (this._user) {
-  //     content = `Hello ${this._user.name} ${this._user.surname}`;
-  //   }
-  //   const messages = createTag({
-  //     tag: 'div',
-  //     className: 'messages',
-  //     childrenArray: [{ tag: 'p', textContent: content }],
-  //   });
-  //   document.querySelector('.main')?.append(messages);
-  //   setTimeout(() => {
-  //     document.querySelector('.messages')?.remove();
-  //   }, 2000);
-  // }
+  //remove // this ,must work
+  greetingMessage() {
+    let content = '';
+    if (this._user) {
+      content = `Hello \n${this._user.name} ${this._user.surname}`;
+    }
+    const messages = createTag({
+      tag: 'div',
+      className: 'messages',
+      childrenArray: [{ tag: 'p', textContent: content }],
+    });
+    document.querySelector('.main')?.append(messages);
+    setTimeout(() => {
+      document.querySelector('.messages')?.remove();
+    }, 5000);
+  }
 }
 
 export const userLogFuncClass = new UserLogFunc();

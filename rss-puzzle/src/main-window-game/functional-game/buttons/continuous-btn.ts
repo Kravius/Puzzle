@@ -1,4 +1,3 @@
-import { json } from 'stream/consumers';
 import { data } from '../../../take-data/data';
 
 export interface IdObject {

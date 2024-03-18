@@ -31,6 +31,7 @@ export class StartWindow {
       startGameBtn(this.main, this.startWindow);
       //create Main window game!!
       const mainGameWindow = new CreateMainGameWindow();
+      console.log(mainGameWindow);
     });
     this.startWindow.append(startBTN);
     this.main?.append(this.startWindow);
@@ -53,8 +54,8 @@ export class StartWindow {
 
   removeStartWindowFromMain() {
     if (this.main) {
-      if (this.startWindow) {
-        this.startWindow = this.main?.removeChild(this.startWindow) as HTMLElement;
+      while (this.main.firstChild) {
+        this.main.removeChild(this.main.firstChild);
       }
       if (this.loginScreen) {
         this.main?.append(this.loginScreen);

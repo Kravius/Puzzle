@@ -6,7 +6,7 @@ import { ClickMoveDraggableSpan } from './functional-game/move-words';
 import { checkGuessingSentencesForEmpty, checkSentencesInGameFiled } from './functional-game/buttons/check-btn';
 import { continuousBTN, deletedParentElement } from './functional-game/buttons/continuous-btn';
 
-import { IdObject } from './functional-game/buttons/continuous-btn';
+
 import { Rounds } from '../take-data/type';
 
 export class CreateMainGameWindow {
@@ -32,6 +32,7 @@ export class CreateMainGameWindow {
     this.createSectionCarts();
     this.createSentenceForGuessing();
     const clickMoveDraggable = new ClickMoveDraggableSpan();
+    console.log(clickMoveDraggable)
   }
 
   createSectionCarts() {
@@ -189,6 +190,7 @@ export class CreateMainGameWindow {
 
       this.createSentenceForGuessing();
       const clickMoveDraggable = new ClickMoveDraggableSpan();
+console.log(clickMoveDraggable)
     });
     return continueBtn;
   }

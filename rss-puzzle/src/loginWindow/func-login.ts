@@ -1,6 +1,5 @@
 type fucusFunc = (this: HTMLElement, ev?: FocusEvent) => void;
 type FirstLetter = (value: string) => boolean;
-type SubmitFunc = (this: HTMLElement, ev?: SubmitEvent) => boolean;
 type lengthFunc = (value: string, length: number) => boolean;
 
 const checkInput: fucusFunc = function (ev?: FocusEvent) {

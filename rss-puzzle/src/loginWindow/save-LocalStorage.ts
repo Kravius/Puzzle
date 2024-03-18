@@ -2,6 +2,7 @@ type SubmitFunc = (this: HTMLElement, ev?: Event) => void;
 
 // maybe we will need in future to check BTN
 export const checkAfterClickBtnInputs: SubmitFunc = (ev?: Event) => {
+  console.log(ev?.target);
   const inputName = document.querySelectorAll('.form-input')[0] as HTMLInputElement;
   const inputSurname = document.querySelectorAll('.form-input')[1] as HTMLInputElement;
 
