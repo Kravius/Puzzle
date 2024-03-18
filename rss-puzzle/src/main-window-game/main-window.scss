@@ -85,10 +85,17 @@
   }
 }
 
-.droppable_word {
+.word {
   flex: 1;
   text-align: center;
   padding: 10px;
+
+  cursor: pointer;
+  transition: ease-in-out .4s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 
   @media (max-width: 768px) {
     padding: 5px;
@@ -97,13 +104,4 @@
 
 .guessing-field {
   padding-top: 20px;
-}
-
-.droppable_word {
-  cursor: pointer;
-  transition: ease-in-out .4s;
-
-  &:hover {
-    transform: scale(1.2);
-  }
 }

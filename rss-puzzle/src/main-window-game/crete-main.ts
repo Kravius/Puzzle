@@ -44,7 +44,7 @@ export class CreateMainGameWindow {
       containerSpanNum.append(spanNum);
       const textArray = el.textExample.split(' ');
 
-      this.createWordSpanOnSentences(textArray, sentencesDiv, 'data-draggable-span');
+      this.createWordSpanOnSentences(textArray, sentencesDiv, 'data-draggable-span', ['word', 'droppable-word']);
 
       containerSentences.append(sentencesDiv);
       playingField.append(containerSpanNum, containerSentences);
@@ -52,11 +52,17 @@ export class CreateMainGameWindow {
   }
 
   //create words in span
-  createWordSpanOnSentences(sentences: string[], parent: HTMLElement, typeAttribute: string, guessing?: string) {
+  createWordSpanOnSentences(
+    sentences: string[],
+    parent: HTMLElement,
+    typeAttribute: string,
+    className: string | string[],
+    guessing?: string
+  ) {
     sentences.forEach((el) => {
       const spanWordTextEnglish = createTag({
         tag: 'span',
-        className: 'droppable_word',
+        className: className,
         //if we have create for guessing we write word
         textContent: guessing ? el : '',
         attributeType: [
@@ -82,7 +88,13 @@ export class CreateMainGameWindow {
       attributeType: { type: 'data-draggable-id', text: `${data.rounds[0].words[0].id}` },
     });
     const sentencesGuessing = data.rounds[0].words[0].textExample.split(' ');
-    this.createWordSpanOnSentences(sentencesGuessing, containerGuessing, 'data-draggable-span', 'true');
+    this.createWordSpanOnSentences(
+      sentencesGuessing,
+      containerGuessing,
+      'data-draggable-span',
+      ['word', 'draggable-word'],
+      'true'
+    );
 
     guessingField.append(containerGuessing);
     this.main?.append(guessingField);
