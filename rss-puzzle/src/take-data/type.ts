@@ -16,7 +16,7 @@ interface LevelData {
   year: string;
 }
 
-interface Rounds {
+export interface Rounds {
   levelData: LevelData;
   words: Words[];
 }

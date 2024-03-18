@@ -11,13 +11,10 @@ export function checkGuessingSentencesForEmpty() {
   }
 }
 
-export function checkSentencesInGameFiled() {
+export function checkSentencesInGameFiled(): boolean {
   const guessingSentenceId = document.querySelector('.guessing_container')?.getAttribute('data-draggable-id');
-  // const sentencesId = guessingSentenceToMove?.getAttribute('data-draggable-id');
 
   const droppableWords = document.querySelectorAll(`#_${guessingSentenceId} span`);
-
-  // const draggableWords = document.querySelectorAll(`.data-draggable-id`);
   let flag = true;
   Array.from(droppableWords).forEach((el) => {
     const span = el as HTMLElement;
@@ -31,5 +28,6 @@ export function checkSentencesInGameFiled() {
       span.style.border = '';
     }, 5000);
   });
-  // console.log(checkFild);
+  return flag;
 }
+

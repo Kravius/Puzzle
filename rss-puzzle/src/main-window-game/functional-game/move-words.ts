@@ -13,7 +13,6 @@ export class ClickMoveDraggableSpan {
 
     const sentencesId = guessingSentenceToMove?.getAttribute('data-draggable-id');
 
-    console.log(typeof sentencesId);
     this.guessingSentences = document.querySelectorAll(`#_${sentencesId} span`);
     if (this.guessingWordsToMove) {
       this.moveWord(this.guessingWordsToMove, this.guessingSentences);
@@ -23,7 +22,7 @@ export class ClickMoveDraggableSpan {
   moveWord(fromSentence: NodeListOf<HTMLElement>, toSentence: NodeListOf<HTMLElement>) {
     fromSentence.forEach((el) => {
       el?.addEventListener('click', function (this: HTMLElement, ev) {
-        console.log(fromSentence);
+        // console.log(fromSentence);
         const targetElement = ev.target as HTMLElement;
         if (targetElement && toSentence) {
           for (let i = 0; i < toSentence.length; i++) {
