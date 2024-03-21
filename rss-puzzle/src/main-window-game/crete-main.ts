@@ -5,6 +5,7 @@ import { data, checkWhatLvlNowJson } from '../take-data/data';
 import { ClickMoveDraggableSpan } from './functional-game/move-words';
 import { checkGuessingSentencesForEmpty, checkSentencesInGameFiled } from './functional-game/buttons/check-btn';
 import { continuousBTN, deletedParentElement } from './functional-game/buttons/continuous-btn';
+import { ButtonTransition } from '../hits/btn-transition';
 
 import { Rounds } from '../take-data/type';
 import { start } from 'repl';
@@ -16,7 +17,9 @@ export class CreateMainGameWindow {
   lvlElementIndex: number;
   currentRound: number;
   id: number;
+  buttonTransition: ButtonTransition;
   constructor() {
+    this.buttonTransition = new ButtonTransition();
     this.main = document.querySelector('.main');
     this.initialize();
 
@@ -225,6 +228,7 @@ export class CreateMainGameWindow {
         }
       });
     }
+    this.buttonTransition.runBTN();
   }
 
   createCheckBtn(parent: HTMLElement) {

@@ -2,6 +2,7 @@
   display: flex;
   padding-bottom: 10px;
   font-family: "Space";
+  justify-content: space-between;
 
   p {
     font-size: 1.3rem;
@@ -30,5 +31,4 @@
   font-size: small;
   width: 60px;
   padding-right: 45px;
-  margin-left: auto;
 }
