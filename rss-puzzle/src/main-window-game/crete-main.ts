@@ -6,7 +6,6 @@ import { ClickMoveDraggableSpan } from './functional-game/move-words';
 import { checkGuessingSentencesForEmpty, checkSentencesInGameFiled } from './functional-game/buttons/check-btn';
 import { continuousBTN, deletedParentElement } from './functional-game/buttons/continuous-btn';
 
-
 import { Rounds } from '../take-data/type';
 
 export class CreateMainGameWindow {
@@ -32,7 +31,7 @@ export class CreateMainGameWindow {
     this.createSectionCarts();
     this.createSentenceForGuessing();
     const clickMoveDraggable = new ClickMoveDraggableSpan();
-    console.log(clickMoveDraggable)
+    console.log(clickMoveDraggable);
   }
 
   createSectionCarts() {
@@ -88,19 +87,28 @@ export class CreateMainGameWindow {
     className: string | string[],
     putIdInSentences?: number | null
   ) {
+    parent.addEventListener('drop', (event: DragEvent) => {
+      this.drop(event);
+    });
     sentences.forEach((el) => {
-      // textContent = putIdInSentences ? el : '';
-
       const spanWordTextEnglish = createTag({
         tag: 'span',
         className: className,
         //if we have create for guessing we write word
         textContent: putIdInSentences ? el : '',
+        id: el,
         attributeType: [
           { type: typeAttribute, text: el },
           { type: 'draggable', text: 'true' },
         ],
       });
+      spanWordTextEnglish.addEventListener('dragover', (event: DragEvent) => {
+        event.preventDefault();
+      });
+      spanWordTextEnglish.addEventListener('dragstart', (event: DragEvent) => {
+        this.dragStart(event);
+      });
+
       parent.append(spanWordTextEnglish);
       setTimeout(() => {
         if (putIdInSentences) {
@@ -110,6 +118,38 @@ export class CreateMainGameWindow {
       }, 0);
     });
   }
+
+  drop(event: DragEvent) {
+    event.preventDefault();
+    if (event.dataTransfer) {
+      const draggableElementData = event.dataTransfer.getData('text');
+      const droppableElementData = (event.target as HTMLElement).id;
+      const element = document.querySelector(`#${droppableElementData}`);
+      if (element) {
+        element.textContent = draggableElementData;
+      }
+      console.log(droppableElementData);
+    }
+  }
+
+  dragStart(event: DragEvent) {
+    if (event.dataTransfer) {
+      const targetId = (event.target as HTMLElement).getAttribute('data-draggable-span');
+      event.dataTransfer.setData('text', targetId as string);
+    }
+  }
+
+  // drop(event: DragEvent) {
+  //   event.preventDefault(); // This is in order to prevent the browser default handling of the data
+  //   // event.target.classList.remove('droppable-hover');
+  //   const draggableElementData = event.dataTransfer.getData('text'); // Get the dragged data. This method will return any data that was set to the same type in the setData() method
+  //   const droppableElementData = event.target.getAttribute('data-draggable-id');
+  //   // const isCorrectMatching = draggableElementData === droppableElementData;
+  //   // if (isCorrectMatching) {
+  //   const draggableElement = document.getElementById(draggableElementData);
+  //   event.target.classList.add('dropped');
+  //   // }
+  // }
 
   createSentenceForGuessing() {
     console.log(this.id);
@@ -121,7 +161,9 @@ export class CreateMainGameWindow {
         className: 'guessing_container',
         attributeType: { type: 'data-draggable-id', text: `${this.dataLvlForStart.words[this.id].id}` },
       });
-      const sentencesGuessing = this.dataLvlForStart.words[this.id].textExample.split(' ');
+      const sentencesGuessingArray = this.dataLvlForStart.words[this.id].textExample.split(' ');
+      const sentencesGuessing = sentencesGuessingArray.sort(() => Math.random() - 0.5);
+
       this.createWordSpanOnSentences(
         sentencesGuessing,
         containerGuessing,
@@ -190,7 +232,7 @@ export class CreateMainGameWindow {
 
       this.createSentenceForGuessing();
       const clickMoveDraggable = new ClickMoveDraggableSpan();
-console.log(clickMoveDraggable)
+      console.log(clickMoveDraggable);
     });
     return continueBtn;
   }

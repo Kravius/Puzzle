@@ -37,8 +37,10 @@ export class UserLogFunc {
 
   logOutText() {
     localStorage.removeItem('user');
+    localStorage.removeItem('IdObject');
     const userTextLog = document.querySelector('.user-name') as HTMLElement;
     userTextLog.textContent = ``;
+    document.querySelector('.main')?.classList.remove('main-start');
   }
   //remove // this ,must work
   greetingMessage() {
@@ -54,7 +56,7 @@ export class UserLogFunc {
     document.querySelector('.main')?.append(messages);
     setTimeout(() => {
       document.querySelector('.messages')?.remove();
-    }, 5000);
+    }, 500);
   }
 }
 

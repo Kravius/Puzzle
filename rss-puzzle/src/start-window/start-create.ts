@@ -43,7 +43,7 @@ export class StartWindow {
     // console.log(this.main);
     if (this.main) {
       this.loginScreen = this.main?.removeChild(this.loginScreen) as HTMLElement;
-      this.main.style.backgroundImage = `url('../../public/background-start/stars.jpeg')`;
+      this.main.classList.add('main-start');
       this.main.style.backgroundSize = '100vw 100vh';
 
       //we delete after end
