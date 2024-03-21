@@ -1,6 +1,16 @@
 .container_field {
+  flex-direction: column;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: clamp(20.625rem, -2.5rem + 74vw, 43.75rem);
+  overflow: hidden;
+  border: 1px solid;
+  background-size: contain;
+}
+
+.active-word-img {
+  background: rgba(0, 0, 0, 0) !important;
 }
 
 .section {
@@ -45,14 +55,6 @@
   }
 }
 
-.container_field {
-  display: flex;
-  flex-direction: column;
-  width: clamp(20.625rem, -2.5rem + 74vw, 43.75rem);
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid;
-}
-
 .droppable_sentences {
   display: flex;
   justify-content: center;
@@ -86,10 +88,11 @@
 }
 
 .word {
+  height: 100%;
   flex: 1;
   text-align: center;
   padding: 10px;
-
+  background: rgba(0, 0, 0, 1);
   cursor: pointer;
   transition: ease-in-out .4s;
 

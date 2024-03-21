@@ -47,6 +47,11 @@ export class CreateMainGameWindow {
 
   createSentences(playingField: HTMLElement) {
     const containerSentences = createTag({ tag: 'div', className: 'container_field' });
+    let { lvlElementIndex, currentRound } = this.buttonTransition.json();
+    let imgDisplay = data[lvlElementIndex].rounds[currentRound].levelData.imageSrc;
+    console.log(imgDisplay);
+    containerSentences.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data/main/images/${imgDisplay}')`;
+
     let i = 1;
     const containerSpanNum = createTag({ tag: 'div', className: 'container-num' });
 
