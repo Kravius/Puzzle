@@ -7,12 +7,12 @@ import { checkGuessingSentencesForEmpty, checkSentencesInGameFiled } from './fun
 import { continuousBTN, deletedParentElement } from './functional-game/buttons/continuous-btn';
 
 import { Rounds } from '../take-data/type';
+import { start } from 'repl';
 
 export class CreateMainGameWindow {
   private main: HTMLElement | null;
   // clickMoveDraggable: ClickMoveDraggableSpan;
   private dataLvlForStart: Rounds | null;
-
   lvlElementIndex: number;
   currentRound: number;
   id: number;
@@ -59,9 +59,16 @@ export class CreateMainGameWindow {
         // write that selector can t be number so i make id='_num'
         const sentencesDiv = createTag({ tag: 'div', className: 'droppable_sentences', id: `_${el.id}` });
         let idForSentencesWhereWeMustStop: number | null = this.id;
+
         if (index >= this.id) {
           idForSentencesWhereWeMustStop = null;
         }
+        console.log(this.id);
+        //проверка где вставлять драгабле
+        // let idForTheDraggable = false;
+        // if (index === this.id) {
+        //   idForTheDraggable = true;
+        // }
         const textArray = el.textExample.split(' ');
 
         this.createWordSpanOnSentences(
@@ -71,6 +78,7 @@ export class CreateMainGameWindow {
           ['word', 'droppable-word'],
           //delete true
           idForSentencesWhereWeMustStop
+          // idForTheDraggable
         );
 
         containerSentences.append(sentencesDiv);
@@ -85,28 +93,29 @@ export class CreateMainGameWindow {
     parent: HTMLElement,
     typeAttribute: string,
     className: string | string[],
-    putIdInSentences?: number | null
+    putIdInSentences?: number | null,
+    idForTheDraggable?: boolean
   ) {
-    parent.addEventListener('drop', (event: DragEvent) => {
-      this.drop(event);
-    });
     sentences.forEach((el) => {
       const spanWordTextEnglish = createTag({
         tag: 'span',
         className: className,
         //if we have create for guessing we write word
         textContent: putIdInSentences ? el : '',
-        id: el,
+        id: putIdInSentences ? el : '',
         attributeType: [
           { type: typeAttribute, text: el },
-          { type: 'draggable', text: 'true' },
+          ...(idForTheDraggable ? [{ type: 'draggable', text: 'true' }] : []),
         ],
+      });
+      spanWordTextEnglish.addEventListener('dragstart', (event: DragEvent) => {
+        this.dragStart(event);
       });
       spanWordTextEnglish.addEventListener('dragover', (event: DragEvent) => {
         event.preventDefault();
       });
-      spanWordTextEnglish.addEventListener('dragstart', (event: DragEvent) => {
-        this.dragStart(event);
+      spanWordTextEnglish.addEventListener('drop', (event: DragEvent) => {
+        this.drop(event);
       });
 
       parent.append(spanWordTextEnglish);
@@ -119,37 +128,62 @@ export class CreateMainGameWindow {
     });
   }
 
-  drop(event: DragEvent) {
+  dragOver(event: DragEvent) {
     event.preventDefault();
+  }
+
+  drop(event: DragEvent) {
+    // event.preventDefault();
     if (event.dataTransfer) {
-      const draggableElementData = event.dataTransfer.getData('text');
-      const droppableElementData = (event.target as HTMLElement).id;
-      const element = document.querySelector(`#${droppableElementData}`);
-      if (element) {
-        element.textContent = draggableElementData;
+      const draggedId = event.dataTransfer.getData('text/plain');
+      const draggedElement = document.getElementById(draggedId);
+      const targetElement = event.target as HTMLElement;
+
+      let parentIdDrag;
+      let parentIdTarget;
+      if (draggedElement && targetElement) {
+        parentIdDrag = draggedElement.parentNode;
+        parentIdTarget = targetElement.parentNode;
+        if (parentIdDrag instanceof HTMLElement && parentIdTarget instanceof HTMLElement) {
+          //смотрим ид куда и откуда кидаем
+          parentIdDrag = parentIdDrag.id ? parentIdDrag.id : parentIdDrag.getAttribute('data-draggable-id');
+          if (parentIdTarget.id) {
+            parentIdTarget = parentIdTarget.id[1] ? parentIdTarget.id[1] : parentIdTarget.id[0];
+          } else {
+            parentIdTarget = parentIdTarget.getAttribute('data-draggable-id');
+          }
+        }
       }
-      console.log(droppableElementData);
+      if (targetElement && targetElement instanceof HTMLElement && draggedElement && parentIdTarget === parentIdDrag) {
+        // Создаем копию целевого элемента
+        // const targetElementClone = targetElement.cloneNode(true) as HTMLElement;
+        const targetElementClone = targetElement.textContent;
+        const draggedElementClone = draggedElement.textContent;
+
+        // Вставляем копию перед перетаскиваемым элементом
+        // draggedElement.parentNode?.insertBefore(targetElementClone, draggedElement);
+        draggedElement.textContent = targetElementClone;
+        targetElement.textContent = draggedElementClone;
+
+        // Удаляем перетаскиваемый элемент
+        // draggedElement.parentNode?.removeChild(draggedElement);
+
+        // Вставляем перетаскиваемый элемент на место целевого элемента
+        // targetElement.parentNode?.replaceChild(draggedElement, targetElement);
+      }
     }
   }
 
   dragStart(event: DragEvent) {
-    if (event.dataTransfer) {
-      const targetId = (event.target as HTMLElement).getAttribute('data-draggable-span');
-      event.dataTransfer.setData('text', targetId as string);
+    console.log(123);
+    if (event.dataTransfer && event.target instanceof HTMLElement) {
+      const targetID = event.target.id;
+      if (targetID) {
+        console.log(targetID);
+        event.dataTransfer.setData('text', targetID);
+      }
     }
   }
-
-  // drop(event: DragEvent) {
-  //   event.preventDefault(); // This is in order to prevent the browser default handling of the data
-  //   // event.target.classList.remove('droppable-hover');
-  //   const draggableElementData = event.dataTransfer.getData('text'); // Get the dragged data. This method will return any data that was set to the same type in the setData() method
-  //   const droppableElementData = event.target.getAttribute('data-draggable-id');
-  //   // const isCorrectMatching = draggableElementData === droppableElementData;
-  //   // if (isCorrectMatching) {
-  //   const draggableElement = document.getElementById(draggableElementData);
-  //   event.target.classList.add('dropped');
-  //   // }
-  // }
 
   createSentenceForGuessing() {
     console.log(this.id);
@@ -161,8 +195,10 @@ export class CreateMainGameWindow {
         className: 'guessing_container',
         attributeType: { type: 'data-draggable-id', text: `${this.dataLvlForStart.words[this.id].id}` },
       });
-      const sentencesGuessingArray = this.dataLvlForStart.words[this.id].textExample.split(' ');
-      const sentencesGuessing = sentencesGuessingArray.sort(() => Math.random() - 0.5);
+      const arrayFromData = this.dataLvlForStart.words[this.id].textExample.split(' ');
+
+      const sentencesGuessing = [...arrayFromData];
+      sentencesGuessing.sort(() => Math.random() - 0.5);
 
       this.createWordSpanOnSentences(
         sentencesGuessing,
@@ -170,7 +206,8 @@ export class CreateMainGameWindow {
         'data-draggable-span',
         ['word', 'draggable-word'],
         // make active true
-        sentencesGuessing.length
+        sentencesGuessing.length,
+        true
       );
 
       containerGuessing.addEventListener('click', () => {
@@ -180,6 +217,13 @@ export class CreateMainGameWindow {
 
       this.createCheckBtn(guessingField);
       this.main?.append(guessingField);
+
+      const turnOnDragable = document.querySelector(`#_${this.dataLvlForStart.words[this.id].id}`) as HTMLElement;
+      turnOnDragable.childNodes.forEach((child) => {
+        if (child instanceof HTMLElement) {
+          child.setAttribute('draggable', 'true');
+        }
+      });
     }
   }
 
@@ -191,9 +235,13 @@ export class CreateMainGameWindow {
       textContent: 'Check',
       attributeType: { type: 'disabled', text: '' },
     });
+    let arrForCheck: string[];
+    if (this.dataLvlForStart) {
+      arrForCheck = this.dataLvlForStart.words[this.id].textExample.split(' ');
+    }
 
     checkBtn.addEventListener('click', () => {
-      if (checkSentencesInGameFiled()) {
+      if (checkSentencesInGameFiled(arrForCheck)) {
         document.querySelector('.guessing-field__check-btn')?.remove();
         divBtns.append(this.createContinueCheckBtn());
       }
